@@ -1,0 +1,17 @@
+Access violation writing location in alloc_challange method with tbman.
+
+if (size_table[idx] > 0)
+{
+    uint32_t rv = TbManUtility::xsg_u2(idx + 1);
+    uint8_t* data = (uint8_t*)data_table[idx];
+    size_t sz = size_table[idx];
+
+    for (size_t i = 0; i < sz; i++)
+    {
+        data[i] = ((rv = TbManUtility::xsg_u2(rv)) & 255);
+    }
+}
+
+Getting this error with this line: data[i] = ((rv = TbManUtility::xsg_u2(rv)) & 255);
+Exception thrown at 0x00007FF6EE276D0E in TbMemMan.exe: 0xC0000005: Access violation writing location 0x000001D229286000.
+
